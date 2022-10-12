@@ -12,7 +12,6 @@ func searchInsert(nums []int, target int) int {
         }
     }
     
-    fmt.Println(l,h)
     if target <= nums[l] {
         return l
     } else if l != h && nums[h] >= target{
