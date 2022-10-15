@@ -1,18 +1,16 @@
 func sortedSquares(nums []int) []int {
-    
-    for i:=0;i<len(nums); i++ {
-        nums[i] = nums[i]*nums[i]
-    }
-    
-    for i:=0;i<len(nums); i++ {
-        for j:=i+1;j<len(nums); j++ {
-            if nums[i] > nums[j] {
-                tmp := nums[j]
-                nums[j] = nums[i]
-                nums[i] = tmp
-            }
+    result := make([]int, len(nums))
+    l := 0
+    r := len(nums)-1
+    for i:=len(result)-1;i>=0;i-- {
+        if nums[l]*nums[l] > nums[r]*nums[r] {
+            result[i] = nums[l]*nums[l]
+            l++
+        } else {
+            result[i] = nums[r]*nums[r]
+            r--
         }
     }
     
-    return nums
+    return result
 }
