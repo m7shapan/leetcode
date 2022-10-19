@@ -15,9 +15,9 @@ func checkInclusion(s1 string, s2 string) bool {
         case !found && !isPermutation:
             i++
         case found && !isPermutation:
-            isPermutation = true
-            
             decreaseOrRemove(permutations, s2[i])
+            
+            isPermutation = true
             j = i
             i++
         case !found && isPermutation && i != j:
