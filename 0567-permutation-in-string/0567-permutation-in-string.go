@@ -10,9 +10,11 @@ func checkInclusion(s1 string, s2 string) bool {
     j:=0
     for i:=0;i < len(s2);{
         _, found := permutations[s2[i]]
-        if !found && !isPermutation {
+        
+        switch {
+        case !found && !isPermutation:
             i++
-        } else if found && !isPermutation {
+        case found && !isPermutation:
             isPermutation = true
             
             if v, found := permutations[s2[i]]; found && v > 1 {
@@ -22,23 +24,23 @@ func checkInclusion(s1 string, s2 string) bool {
             }
             j = i
             i++
-        } else if !found && isPermutation && i != j {
+        case !found && isPermutation && i != j:
             v, _ := permutations[s2[j]]
             permutations[s2[j]] = v+1
             j++
-        } else if found && isPermutation {
+        case found && isPermutation:
             if v, found := permutations[s2[i]]; found && v > 1 {
                 permutations[s2[i]] = v-1
             } else {
                 delete(permutations, s2[i])
             }
             i++
-        } else {
+        default:
             isPermutation = false
             i++
             j++
         }
-        fmt.Println(permutations)
+        
         
         if len(permutations) == 0 {
            return true
@@ -47,9 +49,3 @@ func checkInclusion(s1 string, s2 string) bool {
     
     return false
 }
-
-// ooolleoooleh
-// F F
-// F F
-// F F
-// T 
