@@ -17,23 +17,14 @@ func checkInclusion(s1 string, s2 string) bool {
         case found && !isPermutation:
             isPermutation = true
             
-            if v, found := permutations[s2[i]]; found && v > 1 {
-                permutations[s2[i]] = v-1
-            } else {
-                delete(permutations, s2[i])
-            }
+            decreaseOrRemove(permutations, s2[i])
             j = i
             i++
         case !found && isPermutation && i != j:
-            v, _ := permutations[s2[j]]
-            permutations[s2[j]] = v+1
+            permutations[s2[j]] = permutations[s2[j]]+1
             j++
         case found && isPermutation:
-            if v, found := permutations[s2[i]]; found && v > 1 {
-                permutations[s2[i]] = v-1
-            } else {
-                delete(permutations, s2[i])
-            }
+            decreaseOrRemove(permutations, s2[i])
             i++
         default:
             isPermutation = false
@@ -48,4 +39,13 @@ func checkInclusion(s1 string, s2 string) bool {
     }
     
     return false
+}
+
+
+func decreaseOrRemove(m map[byte]int, i byte) {
+    if v, found := m[i]; found && v > 1 {
+        m[i] = v-1
+    } else {
+        delete(m, i)
+    }
 }
